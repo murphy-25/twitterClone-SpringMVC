@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="twitterClone-SpringMVC:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="SpringProjectTest.war">
+      <element id="artifact" artifact-name="twitterClone-SpringMVC:war exploded" />
+    </root>
+  </artifact>
+</component>
