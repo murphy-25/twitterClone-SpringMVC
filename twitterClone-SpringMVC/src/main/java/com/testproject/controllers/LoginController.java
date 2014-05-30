@@ -2,7 +2,9 @@ package com.testproject.controllers;
 
 import com.testproject.interfaces.LoginService;
 import com.testproject.models.Login;
+import com.testproject.services.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,31 +16,27 @@ import javax.validation.Valid;
 
 @RestController
 @Component
+@RequestMapping("/")
 public class LoginController {
-    private LoginService loginService;
+    private LoginServiceImpl loginServiceImpl;
 
     @Autowired
-    public LoginController(LoginService loginService) {
-        this.loginService = loginService;
+    public LoginController(LoginServiceImpl loginServiceImpl) {
+        this.loginServiceImpl = loginServiceImpl;
     }
 
-    @RequestMapping(value="/", method=RequestMethod.GET)
+    @RequestMapping(method=RequestMethod.GET)
     private ModelAndView serveLogin() {
         return new ModelAndView("login");
     }
 
-    @RequestMapping(value="/account", method=RequestMethod.GET)
-    private ModelAndView serveAccount() {
-        return new ModelAndView("account");
-    }
-
-    @RequestMapping(value="/", method=RequestMethod.POST)
-    private ModelAndView serveAccount(@Valid Login login, BindingResult result) {
+    @RequestMapping(method=RequestMethod.POST)
+    private ModelAndView checkLogin(@Valid Login login, BindingResult result) {
         if(result.hasErrors()) {
             return new ModelAndView("login");
         } else {
-            loginService.checkLogin(login);
-            return new ModelAndView("redirect:/account");
+            loginServiceImpl.checkLogin(login);
+            return new ModelAndView("redirect:account");
         }
     }
 }
