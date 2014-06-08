@@ -16,7 +16,7 @@ import javax.validation.Valid;
 
 @RestController
 @Component
-@RequestMapping("/")
+@RequestMapping("/login")
 public class LoginController {
     private LoginServiceImpl loginServiceImpl;
 
@@ -30,7 +30,7 @@ public class LoginController {
         return new ModelAndView("login");
     }
 
-    @RequestMapping(method=RequestMethod.POST)
+    /*@RequestMapping(method=RequestMethod.POST)
     private ModelAndView checkLogin(@Valid Login login, BindingResult result) {
         if(result.hasErrors()) {
             return new ModelAndView("login");
@@ -38,5 +38,5 @@ public class LoginController {
             loginServiceImpl.checkLogin(login);
             return new ModelAndView("redirect:account");
         }
-    }
+    }*/
 }

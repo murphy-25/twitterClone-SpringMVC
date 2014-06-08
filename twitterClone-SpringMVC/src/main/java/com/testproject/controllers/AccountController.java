@@ -10,11 +10,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @Component
-@RequestMapping("account")
+@RequestMapping("/")
 public class AccountController {
 
         @RequestMapping(method = RequestMethod.GET)
-        private ModelAndView serveAccount(Model model) {
+        private ModelAndView serveAccount() {
             return new ModelAndView("account");
         }
 }

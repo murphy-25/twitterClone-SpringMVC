@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
@@ -12,21 +13,30 @@
 </head>
 <body>
     <div class="container">
-        <form class="form-signin" role="form" action="/" method="post">
+        <c:url value="/j_spring_security_check" var="loginUrl"/>
+        <form class="form-signin" role="form" action="${loginUrl}" method="post">
             <h2 class="form-signin-heading">Please sign in</h2>
+            <c:if test="${param.error != null}">
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <p>Invalid username name and password.</p>
+                </div>
+            </c:if>
+            <c:if test="${param.logout != null}">
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <p>You have been logged out.</p>
+                </div>
+            </c:if>
             <input type="text" class="form-control" id="username" name="username" placeholder="Username" required autofocus>
-            <form:errors path="login.username" class="control-label"/>
+                <form:errors path="login.username" class="control-label"/>
             <input type="password" class="form-control" id="inputWarning2" name="password" placeholder="Password" required>
-            <form:errors path="login.password" class="" />
-            <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
+                <form:errors path="login.password" class="" />
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>.
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
     </div>
 
-    <p pat>${login.username}</p>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="/resources/bootstrap/js/bootstrap.min.js"></script>
 </body>

@@ -2,10 +2,7 @@ package com.testproject.config;
 
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
@@ -14,14 +11,13 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter{
 
-   /*@Override
+    @Override
     public void addViewControllers(ViewControllerRegistry registry)
     {
         super.addViewControllers(registry);
-        registry.addViewController("login/form").setViewName("login");
-        registry.addViewController("welcome").setViewName("welcome");
-        registry.addViewController("admin").setViewName("admin");
-    }*/
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/account").setViewName("account");
+    }
 
     @Bean
     public ViewResolver getViewResolver() {
